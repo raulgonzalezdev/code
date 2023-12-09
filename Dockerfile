@@ -5,11 +5,12 @@ FROM codercom/code-server:latest
 ENV PASSWORD="ML!gsx90l02"
 
 # Copia el proyecto al contenedor
-COPY ./code /home/coder/project
+COPY . /home/coder/project
 
 # Cambia la propiedad del directorio del proyecto
 RUN sudo chown -R coder:coder /home/coder/project
 
 # Exponer el puerto de code-server
 EXPOSE 8080
+
 
