@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   code-server:
-    build: ./code
+   
     image: codercom/code-server:latest
     container_name: code-server
     environment:
