@@ -4,7 +4,7 @@ services:
     image: codercom/code-server:latest
     container_name: code-server
     environment:
-      - PASSWORD=yourpassword  # Cambia esto por tu contraseña
+      - PASSWORD=ML!gsx90l02  # Cambia esto por tu contraseña
     volumes:
       - "/var/www/webapp/code:/home/coder"
       - "/etc/letsencrypt:/etc/letsencrypt:ro"
