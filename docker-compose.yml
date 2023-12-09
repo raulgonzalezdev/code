@@ -1,10 +1,11 @@
 version: '3.8'
 services:
   code-server:
+    build: ./code
     image: codercom/code-server:latest
     container_name: code-server
     environment:
-      - PASSWORD=ML!gsx90l02  # Cambia esto por tu contraseña
+      - PASSWORD=ML!gsx90l02  # Usa una contraseña segura
     volumes:
       - "/var/www/webapp:/home/coder/project"
       - "/etc/letsencrypt:/etc/letsencrypt:ro"
@@ -12,13 +13,15 @@ services:
       - "8443:8080"
 
   nginx:
+    build: ./nginx
     image: nginx:latest
     container_name: nginx
     volumes:
-      - "/var/www/webapp/nginx:/etc/nginx/conf.d"
+      - "./nginx:/etc/nginx/conf.d"  # Asegúrate de que esta ruta sea correcta y coincida con tu estructura de directorios
       - "/etc/letsencrypt:/etc/letsencrypt:ro"
     ports:
-      - "8080:80"
-      - "8444:443"
+      - "80:80"
+      - "443:443"  # Asegúrate de que no haya otros servicios usando el puerto 443 en tu servidor
     depends_on:
       - code-server
+
