@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  code-server:
+    image: codercom/code-server:latest
+    container_name: code-server
+    environment:
+      - PASSWORD=yourpassword  # Cambia esto por tu contraseña
+    volumes:
+      - "/var/www/webapp/code:/home/coder"
+      - "/etc/letsencrypt:/etc/letsencrypt:ro"
+    ports:
+      - "8443:8080"
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - "/var/www/webapp/nginx:/etc/nginx/conf.d"
+      - "/etc/letsencrypt:/etc/letsencrypt:ro"
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - code-server
