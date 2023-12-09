@@ -6,7 +6,7 @@ services:
     environment:
       - PASSWORD=ML!gsx90l02  # Cambia esto por tu contraseña
     volumes:
-      - "/var/www/webapp/code:/home/coder"
+      - "/var/www/webapp:/home/coder/project"
       - "/etc/letsencrypt:/etc/letsencrypt:ro"
     ports:
       - "8443:8080"
@@ -19,6 +19,6 @@ services:
       - "/etc/letsencrypt:/etc/letsencrypt:ro"
     ports:
       - "80:80"
-      - "443:443"
+      - "8444:443"
     depends_on:
       - code-server
