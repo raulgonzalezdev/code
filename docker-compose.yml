@@ -18,7 +18,7 @@ services:
       - "/var/www/webapp/nginx:/etc/nginx/conf.d"
       - "/etc/letsencrypt:/etc/letsencrypt:ro"
     ports:
-      - "80:80"
+      - "8080:80"
       - "8444:443"
     depends_on:
       - code-server
