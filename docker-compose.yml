@@ -1,25 +1,14 @@
 version: '3.8'
 services:
   code-server:
-    image: codercom/code-server:latest
+    build: ./code  # Si tienes un Dockerfile en la carpeta 'code'
     container_name: code-server
     environment:
       - PASSWORD=ML!gsx90l02  # Usa una contraseña segura
     volumes:
-      - "/var/www/webapp:/home/coder/project"
+      - "/var/www/webapp/code:/home/coder/project"  # Asegúrate de que esta ruta coincida con la ubicación de tus archivos de proyecto
     ports:
       - "8443:8080"
-  
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    volumes:
-      - "/var/www/webapp/nginx:/etc/nginx/conf.d"  # Configuración de Nginx
-      - "/etc/letsencrypt:/etc/letsencrypt:ro"     # Certificados SSL
-    ports:
-      - "80:80"   # Puerto HTTP estándar
-      - "443:443" # Puerto HTTPS estándar
-    depends_on:
-      - code-server
+
 
 
