@@ -12,16 +12,7 @@ services:
     ports:
       - "8443:8080"
 
-  nginx:
-    build: ./nginx
-    image: nginx:latest
-    container_name: nginx
-    volumes:
-      - "./nginx:/etc/nginx/conf.d"  # Asegúrate de que esta ruta sea correcta y coincida con tu estructura de directorios
-      - "/etc/letsencrypt:/etc/letsencrypt:ro"
-    ports:
-      - "80:80"
-      - "443:443"  # Asegúrate de que no haya otros servicios usando el puerto 443 en tu servidor
+  
     depends_on:
       - code-server
 
