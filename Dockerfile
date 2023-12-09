@@ -1,3 +1,8 @@
+FROM nginx:latest
+
+COPY /etc/letsencrypt/live/code.datqbox.com/fullchain.pem /etc/ssl/certs/
+COPY /etc/letsencrypt/live/code.datqbox.com/privkey.pem /etc/ssl/private/
+
 # Utiliza la imagen oficial de code-server como base
 FROM codercom/code-server:latest
 
