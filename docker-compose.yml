@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   code-server:
- 
+    build: .  # Si tienes un Dockerfile en la carpeta 'code'
     container_name: code-server
     environment:
       - PASSWORD=ML!gsx90l02  # Usa una contraseña segura
