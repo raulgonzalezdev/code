@@ -4,6 +4,9 @@ FROM codercom/code-server:latest
 # Establece la contraseña para code-server
 ENV PASSWORD="ML!gsx90l02"
 
+# Asegúrate de que los comandos se ejecuten como root
+USER root
+
 # Instalar dependencias y Node.js
 RUN apt-get update && \
     apt-get install -y ca-certificates curl gnupg && \
@@ -26,5 +29,9 @@ RUN chown -R coder:coder /home/coder/project
 
 # Exponer el puerto de code-server
 EXPOSE 8080
+
+# Cambia de nuevo al usuario original (si es necesario)
+USER coder
+
 
 
