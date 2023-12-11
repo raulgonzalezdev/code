@@ -4,24 +4,25 @@ FROM codercom/code-server:latest
 # Establece la contraseña para code-server
 ENV PASSWORD="ML!gsx90l02"
 
-# Instalar Node.js (usando Node.js 16)
+# Instalar dependencias y Node.js
+RUN apt-get update && \
+    apt-get install -y ca-certificates curl gnupg && \
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 
-RUN  apt-get update
-RUN  apt-get install -y ca-certificates curl gnupg
-RUN mkdir -p /etc/apt/keyrings
-RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-
+# Define la versión mayor de Node.js a instalar
 ENV NODE_MAJOR=20
-RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 
-RUN apt-get update
-RUN apt-get install nodejs -y
+# Añade el repositorio de NodeSource y actualiza la lista de paquetes
+RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install -y nodejs
 
 # Copia el proyecto al contenedor
 COPY . /home/coder/project
 
 # Cambia la propiedad del directorio del proyecto
-RUN sudo chown -R coder:coder /home/coder/project
+RUN chown -R coder:coder /home/coder/project
 
 # Exponer el puerto de code-server
 EXPOSE 8080
