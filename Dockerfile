@@ -5,7 +5,7 @@ FROM codercom/code-server:latest
 ENV PASSWORD="ML!gsx90l02"
 
 # Instalar Node.js (usando Node.js 16)
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
 
 # Copia el proyecto al contenedor
