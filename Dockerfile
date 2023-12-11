@@ -4,6 +4,10 @@ FROM codercom/code-server:latest
 # Establece la contraseña para code-server
 ENV PASSWORD="ML!gsx90l02"
 
+# Instalar Node.js (usando Node.js 16)
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs
+
 # Copia el proyecto al contenedor
 COPY . /home/coder/project
 
